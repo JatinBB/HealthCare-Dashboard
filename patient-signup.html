@@ -1,0 +1,121 @@
+<style>
+#patient-signup-form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #patient-signup-form h2 {
+    margin-top: 0;
+  }
+  
+  #patient-signup-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  #patient-signup-form input[type="text"],
+  #patient-signup-form input[type="tel"],
+  #patient-signup-form input[type="email"],
+  #patient-signup-form input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #patient-signup-form input[type="date"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M4 4h12v2H4V4zm0 3h12v2H4V7zm0 3h12v2H4v13a1 1 0 0 0 1 1h14a1 1 00 0 1-1V13z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+  }
+  
+  #patient-signup-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #patient-signup-form input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  </style>
+<body>
+    <div id="patient-signup-form" class="login-form">
+        <h2>Patient Sign Up</h2>
+        <form>
+          <label for="full-name">Full Name:</label><br>
+          <input type="text" id="full-name" name="full-name"><br>
+          <label for="aadhaar-number">Aadhaar Number:</label><br>
+          <input type="text" id="aadhaar-number" name="aadhaar-number" maxlength="12"><br>
+          <label for="phone-number">Phone Number:</label><br>
+          <input type="tel" id="phone-number" name="phone-number"><br>
+          <label for="email-id">Email Id:</label><br>
+          <input type="email" id="email-id" name="email-id"><br>
+          <label for="dob">Date of Birth:</label><br>
+          <input type="date" id="dob" name="dob"><br>
+          <label for="username">Username:</label><br>
+          <input type="text" id="username" name="username"><br>
+          <label for="password">Password:</label><br>
+          <input type="password" id="password" name="password"><br>
+          <label for="confirm-password">Confirm Password:</label><br>
+          <input type="password" id="confirm-password" name="confirm-password"><br>
+          <input type="submit" value="Sign Up" id="signup-button">
+        </form>
+      </div>
+  <script>
+    document.getElementById('patient-signup-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const fullName = document.getElementById('full-name').value;
+  const aadhaarNumber = document.getElementById('aadhaar-number').value;
+  const phoneNumber = document.getElementById('phone-number').value;
+  const emailId = document.getElementById('email-id').value;
+  const dob = document.getElementById('dob').value;
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+
+  // Validate the form fields
+  if (!fullName || !aadhaarNumber || !phoneNumber || !emailId || !dob || !username || !password || !confirmPassword) {
+    alert('Please fill in all the fields.');
+    return;
+  }
+
+  if (aadhaarNumber.length !== 12) {
+    alert('Aadhaar number must be 12 digits long.');
+    return;
+  }
+
+  if (isNaN(aadhaarNumber)) {
+    alert('Aadhaar number must be a number.');
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    alert('Passwords do not match.');
+    return;
+  }
+
+  // Send the form data to the server
+console.log(`Full Name: ${fullName}, Aadhaar Number: ${aadhaarNumber}, Phone Number: ${phoneNumber}, Email Id: ${emailId}, Date of Birth: ${dob}, Username: ${username}, Password: ${password}`);
+});
+  </script>
+</body>
