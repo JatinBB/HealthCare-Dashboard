@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration Form</title>
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+}
+
+form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-top: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+button[type="submit"] {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+    </style>
+  </head>
+  <body>
+    <form id="registration-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit">Register</button>
+    </form>
+    <script>
+const formData = new FormData();
+formData.append("name", name);
+formData.append("email", email);
+formData.append("password", password);
+
+fetch("/register", {
+    method: "POST",
+    body: formData // No need to set Content-Type header
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        alert("Registration successful!");
+    } else {
+        alert("Registration failed. Please try again.");
+    }
+});
+
+// Change the require to an import statement
+import { MongoClient } from 'mongodb';
+
+const url = "mongodb+srv://jatinbadlani3131:W2i4Idb86nL178Dx@jatin.bdx6nkb.mongodb.net/";
+
+export async function connectDB() {
+    try {
+        const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log('got db connection');
+        const db = client.db("hackathon"); // Specify your database name
+        // Your database interaction code here
+    } catch (err) {
+        console.error('Error connecting to MongoDB:', err);
+    }
+}
+
+  </script>
+ </body>
+</html>
