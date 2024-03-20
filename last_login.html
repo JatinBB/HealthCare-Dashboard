@@ -14,18 +14,6 @@
     </form>
 
     <script>
-    //     document.getElementById('loginForm').addEventListener('submit', function(event){
-    // event.preventDefault(); // Prevent the default form submission
-
-    // const formData = {
-    //     username: document.getElementById('username').value,
-    //     password: document.getElementById('password').value,
-    // };
-    // fetch('http://localhost:3200/getUsers')
-    //     .then((res)=>res.json())
-    //     .then((data)=>console.log(data))
-    //     .catch((e)=>console.log(e))
-    // });
     document.getElementById('loginForm').addEventListener('submit', function(event){
     event.preventDefault(); // Prevent the default form submission
 
@@ -33,23 +21,21 @@
         username: document.getElementById('username').value,
         password: document.getElementById('password').value,
     };
+    console.log(formData);
 
     // Using Fetch API to send data
-    fetch('http://localhost:3000/login', {
+    const response = fetch('http://localhost:5500/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({formData}),
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
 });
+  fetch('http://localhost:5500/users')
+        .then((res)=>res.json())
+        .then((data)=>console.log(data))
+        .catch((e)=>console.log(e))
 
     </script>
 </body>
