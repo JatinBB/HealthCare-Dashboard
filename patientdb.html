@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .sidebar {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+        .content {
+            padding: 20px;
+        }
+        /* Style for disabled links */
+        .disabled-link {
+            pointer-events: none; /* Disable pointer events */
+            color: #6c757d; /* Change color to gray */
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <h4>User Type</h4>
+                    <ul>
+                        <li><a href="#" id="doctorLink" class="disabled-link">Doctor</a></li>
+                        <li><a href="#" id="patientLink">Patient</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Content -->
+            <div class="col-md-9">
+                <div class="content" id="dashboardContent">
+                    <!-- Dashboard content will be loaded here based on user role -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap and jQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        // Function to load dashboard content for doctors
+        function loadDoctorDashboard() {
+            document.getElementById('dashboardContent').innerHTML = `
+                <h2>Doctor Dashboard</h2>
+                <p>Welcome, Doctor!</p>
+                <!-- Add additional content specific to doctors -->
+            `;
+        }
+
+        // Function to load dashboard content for patients
+        function loadPatientDashboard() {
+            document.getElementById('dashboardContent').innerHTML = `
+                <h2>Patient Dashboard</h2>
+                <p>Welcome, Patient!</p>
+                <!-- Add additional content specific to patients -->
+            `;
+        }
+
+        // Event listener for doctor link
+        document.getElementById('doctorLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default behavior of the link
+        });
+
+        // Event listener for patient link
+        document.getElementById('patientLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            loadPatientDashboard();
+        });
+
+        // Initial load based on user role (example: patient)
+        loadPatientDashboard(); // Load patient dashboard content by default
+    </script>
+</body>
+</html>

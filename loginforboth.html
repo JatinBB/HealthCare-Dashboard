@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="text-center">Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select class="form-control" id="role" name="role" required>
+                            <option value="">Select Role</option>
+                            <option value="patient">Patient</option>
+                            <option value="doctor">Doctor</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+                </form>
+                <p id="doctorLink" class="text-center mt-3"><a href="doctor_dashboard.html">Visit Doctor Profile</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Add Bootstrap and jQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script>
+        function login() {
+            // Simulate login process
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            // Check username, password, and role (this is just a dummy check)
+            if (username === "patient" && password === "patientpass" && role === "patient") {
+                // Redirect to patient dashboard
+                window.location.href = "patientdb.html";
+            } else if (username === "doctor" && password === "doctorpass" && role === "doctor") {
+                // Redirect to doctor dashboard if the user is a doctor
+                window.location.href = "doctordb.html";
+            } else {
+                alert("Invalid username, password, or role!");
+            }
+        }
+
+        // Add an event listener when the document is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if the user is logged in as a patient
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            if (loggedInUser === "patient") {
+                // Disable the link to the doctor's profile
+                const doctorLink = document.getElementById('doctorLink');
+                doctorLink.innerHTML = "Doctor Profile Disabled";
+                doctorLink.classList.add('disabled-link');
+            }
+        });
+    </script>
+
+    <style>
+        .disabled-link {
+            pointer-events: none;
+            color: #999; /* Change the color of the disabled link */
+        }
+    </style>
+</body>
+</html>
