@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Details</h1>
+        <form id="patient-details-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="aadhaar">Aadhaar Number:</label>
+            <input type="text" id="aadhaar" name="aadhaar" required>
+            <br>
+            <label for ="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" pattern="\d{10}" title="Phone number must be 10 digits" required>
+            <button id="send-otp">Send OTP</button>
+            <label for="dob">Date of Birth:</label>
+           <input type="date" id="dob" name="dob" required>
+            <br>
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" name="other_gender" id="other_gender" placeholder="Other Gender" disabled>
+            <br>
+            <label for="caste">Caste:</label>
+            <select name="caste" id="caste" required>
+                <option value="">Select Caste</option>
+                <option value="General">General</option>
+                <option value="Scheduled Castes (SC)">Scheduled Castes (SC)</option>
+                <option value="Scheduled Tribes (ST)">Scheduled Tribes (ST)</option>
+                <option value="Other Backward Classes (OBC)">Other Backward Classes (OBC)</option>
+            </select>
+            <br>
+            <label for="blood_type">Blood Type:</label>
+            <select name="blood_type" id="blood_type" required>
+                <option value="">Select Blood Type</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+            <br>
+            <label for="medical_history">Past Medical History:</label>
+            <select name="medical_history" id="medical_history">
+                <option value="none">None</option>
+                <option value="have">Have</option>
+            </select>
+            <input type="text" name="medical_history_details" id="medical_history_details" placeholder="Other Past Medical History" disabled>
+            <br>
+            <form class="prescription-form" action="#">
+                <label for="prescription">Prescription:</label><br>
+                <textarea id="prescription" name="prescription" placeholder="Enter prescription here" accept=".pdf,.txt,.jpg,.jpeg,.png" required></textarea><br>
+                <input type="submit" value="Submit Prescription">
+            </form>
+        </form>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('send-otp').addEventListener('click', function() {
+            window.location.href = 'qr.html'; 
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('patient-details-form');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent the default form submission
+      
+      const formData = {
+        name: document.getElementById('name').value,
+        aadhaar: document.getElementById('aadhaar').value,
+        phone: document.getElementById('phone').value,
+        dob: document.getElementById('dob').value,
+        gender: document.getElementById('gender').value,
+        other_gender: document.getElementById('other_gender').value,
+        caste: document.getElementById('caste').value,
+        blood_type: document.getElementById('blood_type').value,
+        medical_history: document.getElementById('medical_history').value,
+        medical_history_details: document.getElementById('medical_history_details').value,
+        prescription: document.getElementById('prescription').value,
+    };
+    console.log(formData);
+     
+      // Use fetch API to send the data to your backend
+const response = fetch('http://localhost:5500/add-patient', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(formData), // Changed from {formData} to formData
+})
+.then(response => response.json()) // Convert the response to JSON
+.then(data => console.log(data)) // Handle the JSON data
+.catch(error => console.error('Error:', error)); // Handle any errors
+
+    });
+})
+fetch('http://localhost:5500/patients')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => console.log(data))
+  .catch(error => console.error('There has been a problem with your fetch operation:', error));
+
+    </script>
+</body>
+</html>
+
