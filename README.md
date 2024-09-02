@@ -73,3 +73,20 @@ Add the following environment variables:
 PORT=3000
 MONGODB_URI=mongodb://localhost:27017/healthcare-dashboard
 JWT_SECRET=your_jwt_secret
+```
+4. Run MongoDB:
+
+Start the MongoDB service on your local machine:
+```bash
+mongod
+```
+5. Start the Application:
+```bash
+npm start
+```
+6. Access the Dashboard:
+Open your web browser and go to http://localhost:3000.
+
+## Conclusion
+
+The HealthCare Dashboard is a powerful tool for managing healthcare data, improving communication between doctors and patients, and ensuring the secure handling of sensitive health information. Its modular architecture and use of modern technologies make it scalable and easy to extend, allowing healthcare providers to tailor it to their specific needs.
